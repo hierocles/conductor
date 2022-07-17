@@ -28,5 +28,13 @@ module Conductor
     # Should include account name & alternative contact method
     # Do not remove "Conductor" from the UserAgent
     config.outbound_user_agent = 'Conductor <Sandaoguo | dylan.hierocles at gmail.com>'
+
+    # Define CORS for the API
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: %i[get options]
+      end
+    end
   end
 end

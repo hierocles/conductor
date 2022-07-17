@@ -23,9 +23,16 @@ gem 'sidekiq-cron', '~>1.6.0'
 
 gem 'activerecord-import', '~> 1.4.0'
 
+gem 'grape', '~> 1.6'
+
+gem "rack-cors", "~> 1.1"
+
+gem "grape-active_model_serializers", "~> 1.5"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'grape_on_rails_routes', '~> 0.3.2'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
 end

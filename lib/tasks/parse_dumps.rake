@@ -449,7 +449,6 @@ class RegionParser < Nokogiri::XML::SAX::Document
   def characters(string)
     case @state
     when Constants::RegionCollectors::COLLECT_NAME then @current_name = string
-    when Constants::RegionCollectors::COLLECT_FACTBOOK then @current_factbook = string
     when Constants::RegionCollectors::COLLECT_NUMNATIONS then @current_numnations = string.to_i
     when Constants::RegionCollectors::COLLECT_NATIONS
       string.split(':').each do |nation|
@@ -475,6 +474,16 @@ class RegionParser < Nokogiri::XML::SAX::Document
   end
 
   #
+  # Collect CDATA from factbooks and set to @current_factbook
+  # @param [String] string Element value
+  #
+  def cdata_block(string)
+    case @state
+      when Constants::RegionCollectors::COLLECT_FACTBOOK then @current_factbook = string
+    end
+  end
+
+  #
   # Append current embassy to @current_embassies
   # Append current region to @regions array and reset state
   # Set state to COLLECT_NOTHING
@@ -486,6 +495,22 @@ class RegionParser < Nokogiri::XML::SAX::Document
     when 'EMBASSY'
       @current_embassies << @current_embassy
       @current_embassy = { type: '', name: '' }
+      @state = Constants::RegionCollectors::COLLECT_NOTHING
+    when 'OFFICER'
+      @current_officers << {
+        nation: @current_officer_nation,
+        office: @current_officer_office,
+        authority: @current_officer_authority,
+        time: @current_officer_time,
+        by: @current_officer_by,
+        order: @current_officer_order
+      }
+      @current_officer_nation = ''
+      @current_officer_office = ''
+      @current_officer_authority = ''
+      @current_officer_time = 0
+      @current_officer_by = ''
+      @current_officer_order = 0
       @state = Constants::RegionCollectors::COLLECT_NOTHING
     when 'REGION'
       @current_region = {
@@ -499,6 +524,9 @@ class RegionParser < Nokogiri::XML::SAX::Document
         founder: @current_founder,
         founderauth: @current_founderauth,
         officers: @current_officers,
+        power: @current_power,
+        flag: @current_flag,
+        banner: @current_banner,
         embassies: @current_embassies,
         lastupdate: @current_lastupdate
       }
@@ -525,6 +553,9 @@ class RegionParser < Nokogiri::XML::SAX::Document
                     founder
                     founderauth
                     officers
+                    power
+                    flag
+                    banner
                     embassies
                     lastupdate
                   ],
