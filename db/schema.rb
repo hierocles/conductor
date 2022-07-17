@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_211318) do
     t.string "power"
     t.string "flag"
     t.integer "banner"
-    t.text "embassies", default: [], array: true
+    t.jsonb "embassies", default: {}
     t.integer "lastupdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

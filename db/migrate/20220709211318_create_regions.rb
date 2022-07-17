@@ -19,7 +19,7 @@ class CreateRegions < ActiveRecord::Migration[7.0]
       t.string :power
       t.string :flag
       t.integer :banner
-      t.text :embassies, array: true, default: []
+      t.jsonb :embassies, default: {}
       t.integer :lastupdate
 
       t.timestamps
