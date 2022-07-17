@@ -118,8 +118,8 @@ class NationParser < Nokogiri::XML::SAX::Document
              when 'ANIMAL' then Constants::NationCollectors::COLLECT_ANIMAL
              when 'CURRENCY' then Constants::NationCollectors::COLLECT_CURRENCY
              when 'DEMONYM' then Constants::NationCollectors::COLLECT_DEMONYM
-             when 'demonym2' then Constants::NationCollectors::COLLECT_demonym2
-             when 'demonym2PLURAL' then Constants::NationCollectors::COLLECT_demonym2PLURAL
+             when 'demonym2' then Constants::NationCollectors::COLLECT_DEMONYM2
+             when 'demonym2PLURAL' then Constants::NationCollectors::COLLECT_DEMONYM2PLURAL
              when 'FLAG' then Constants::NationCollectors::COLLECT_FLAG
              when 'MAJORINDUSTRY' then Constants::NationCollectors::COLLECT_MAJORINDUSTRY
              when 'GOVTPRIORITY' then Constants::NationCollectors::COLLECT_GOVTPRIORITY
