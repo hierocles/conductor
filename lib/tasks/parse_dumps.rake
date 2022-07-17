@@ -479,7 +479,7 @@ class RegionParser < Nokogiri::XML::SAX::Document
   #
   def cdata_block(string)
     case @state
-      when Constants::RegionCollectors::COLLECT_FACTBOOK then @current_factbook = string
+    when Constants::RegionCollectors::COLLECT_FACTBOOK then @current_factbook = string
     end
   end
 
