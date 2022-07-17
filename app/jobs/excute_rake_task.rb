@@ -7,7 +7,7 @@ Rails.application.load_tasks
 # Execute rake task
 # <https://github.com/ondrejbartas/sidekiq-cron/issues/133#issuecomment-871310016>
 #
-class InvokeRakeTaskJob < ApplicationJob
+class ExecuteRakeTaskJob < ApplicationJob
   def perform(args)
     Rake::Task[args['task']].execute(args['args'])
   end

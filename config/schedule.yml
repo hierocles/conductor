@@ -1,23 +1,23 @@
 download_nations:
   cron: 0 2 * * *
-  class: InvokeRakeTaskJob
+  class: ExecuteRakeTaskJob
   args:
     task: download:nations
 
 download_regions:
   cron: 5 2 * * *
-  class: InvokeRakeTaskJob
+  class: ExecuteRakeTaskJob
   args:
     task: download:regions
 
 parse_regions:
   cron: 10 2 * * *
-  class: InvokeRakeTaskJob
+  class: ExecuteRakeTaskJob
   args:
     task: parse:regions
 
 parse_nations:
   cron: 15 2 * * *
-  class: InvokeRakeTaskJob
+  class: ExecuteRakeTaskJob
   args:
     task: parse:nations
