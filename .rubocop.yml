@@ -1,0 +1,35 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'lib/tasks/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/tasks/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/tasks/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'lib/tasks/**/*'
+
+Lint/MissingSuper:
+  Exclude:
+    - 'lib/tasks/**/*'
+
+Lint/CyclomaticComplexity:
+  Exclude:
+    - 'lib/tasks/**/*'
+
+Lint/PerceivedComplexity:
+  Exclude:
+    - 'lib/tasks/**/*'
