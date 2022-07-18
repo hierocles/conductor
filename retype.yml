@@ -1,0 +1,8 @@
+input: /docs
+output: .retype
+url: https://hierocles.github.io/conductor/
+branding:
+  title: Conductor API
+  label: Docs
+footer:
+  copyright: "&copy; Copyright {{ year }}. All rights reserved."
