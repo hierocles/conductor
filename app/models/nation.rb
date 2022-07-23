@@ -8,4 +8,12 @@
 class Nation < ApplicationRecord
   self.inheritance_column = :inheritance
   self.primary_key = :name
+
+  scope :has_not_endorsed, lambda { |target|
+                             select(:name)
+                               .where('? <> ALL(endorsements)', target.downcase)
+                               .where.not(unstatus: 'Non-member')
+                               .where(region: Nation.find(target).region)
+                               .order(:name)
+                           }
 end
