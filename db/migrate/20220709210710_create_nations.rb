@@ -47,5 +47,7 @@ class CreateNations < ActiveRecord::Migration[7.0]
     end
 
     add_index :nations, :name, unique: true
+    add_index :nations, :unstatus
+    add_index :nations, :region
   end
 end
