@@ -168,6 +168,8 @@ GEM
     rack (2.2.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-attack (6.6.1)
+      rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-test (2.0.2)
@@ -254,6 +256,7 @@ DEPENDENCIES
   nokogiri (~> 1.13.6)
   pg (~> 1.1)
   puma (~> 5.0)
+  rack-attack
   rack-cors (~> 1.1)
   rails (~> 7.0.3)
   redis (~> 4.7.1)
