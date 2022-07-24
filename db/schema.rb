@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_211318) do
     t.string "majorindustry"
     t.string "govtpriority"
     t.jsonb "govt", default: {}
-    t.integer "founded"
+    t.string "founded"
     t.integer "firstlogin"
     t.integer "lastlogin"
     t.string "lastactivity"

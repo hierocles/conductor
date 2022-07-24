@@ -27,7 +27,7 @@ class CreateNations < ActiveRecord::Migration[7.0]
       t.string :majorindustry
       t.string :govtpriority
       t.jsonb :govt, default: {}
-      t.integer :founded
+      t.string :founded
       t.integer :firstlogin
       t.integer :lastlogin
       t.string :lastactivity
