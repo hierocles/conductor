@@ -41,13 +41,13 @@ class NationParser < Nokogiri::XML::SAX::Document
     @current_category = ''
     @current_unstatus = ''
     @current_endorsements = []
-    @current_issues_answered = 0
+    @current_issues_answered = ''
     @current_freedom_civilrights = ''
     @current_freedom_economy = ''
     @current_freedom_politicalfreedom = ''
     @current_region = ''
-    @current_population = 0
-    @current_tax = 0
+    @current_population = ''
+    @current_tax = ''
     @current_animal = ''
     @current_currency = ''
     @current_demonym = ''
@@ -56,38 +56,38 @@ class NationParser < Nokogiri::XML::SAX::Document
     @current_flag = ''
     @current_majorindustry = ''
     @current_govtpriority = ''
-    @current_administration = 0
-    @current_defence = 0
-    @current_education = 0
-    @current_environment = 0
-    @current_healthcare = 0
-    @current_commerce = 0
-    @current_internationalaid = 0
-    @current_lawandorder = 0
-    @current_publictransport = 0
-    @current_socialequality = 0
-    @current_spirituality = 0
-    @current_welfare = 0
+    @current_administration = ''
+    @current_defence = ''
+    @current_education = ''
+    @current_environment = ''
+    @current_healthcare = ''
+    @current_commerce = ''
+    @current_internationalaid = ''
+    @current_lawandorder = ''
+    @current_publictransport = ''
+    @current_socialequality = ''
+    @current_spirituality = ''
+    @current_welfare = ''
     @current_founded = ''
-    @current_firstlogin = 0
-    @current_lastlogin = 0
+    @current_firstlogin = ''
+    @current_lastlogin = ''
     @current_lastactivity = ''
     @current_influence = ''
-    @current_freedomscores_civilrights = 0
-    @current_freedomscores_economy = 0
-    @current_freedomscores_politicalfreedom = 0
-    @current_publicsector = 0
+    @current_freedomscores_civilrights = ''
+    @current_freedomscores_economy = ''
+    @current_freedomscores_politicalfreedom = ''
+    @current_publicsector = ''
     @current_death_cause = {
       cause: '',
-      value: 0
+      value: ''
     }
     @current_deaths = []
     @current_leader = ''
     @current_capital = ''
     @current_religion = ''
-    @current_factbooks = 0
-    @current_dispatches = 0
-    @current_dbid = 0
+    @current_factbooks = ''
+    @current_dispatches = ''
+    @current_dbid = ''
   end
 
   #
@@ -161,69 +161,69 @@ class NationParser < Nokogiri::XML::SAX::Document
   #
   def characters(string)
     case @state
-    when Constants::NationCollectors::COLLECT_NAME then @current_name = string
-    when Constants::NationCollectors::COLLECT_TYPE then @current_type = string
-    when Constants::NationCollectors::COLLECT_FULLNAME then @current_fullname = string
-    when Constants::NationCollectors::COLLECT_MOTTO then @current_motto = string
-    when Constants::NationCollectors::COLLECT_CATEGORY then @current_category = string
-    when Constants::NationCollectors::COLLECT_UNSTATUS then @current_unstatus = string
+    when Constants::NationCollectors::COLLECT_NAME then @current_name += string
+    when Constants::NationCollectors::COLLECT_TYPE then @current_type += string
+    when Constants::NationCollectors::COLLECT_FULLNAME then @current_fullname += string
+    when Constants::NationCollectors::COLLECT_MOTTO then @current_motto += string
+    when Constants::NationCollectors::COLLECT_CATEGORY then @current_category += string
+    when Constants::NationCollectors::COLLECT_UNSTATUS then @current_unstatus += string
     when Constants::NationCollectors::COLLECT_ENDORSEMENTS
       string.split(',').each do |endorsement|
         @current_endorsements << endorsement.strip
       end
-    when Constants::NationCollectors::COLLECT_ISSUES_ANSWERED then @current_issues_answered = string.to_i
+    when Constants::NationCollectors::COLLECT_ISSUES_ANSWERED then @current_issues_answered += string
     when Constants::NationCollectors::COLLECT_CIVILRIGHTS
       if string.integer?
-        @current_freedomscores_civilrights = string.to_f
+        @current_freedomscores_civilrights += string
       else
-        @current_freedom_civilrights = string
+        @current_freedom_civilrights += string
       end
     when Constants::NationCollectors::COLLECT_ECONOMY
       if string.integer?
-        @current_freedomscores_economy = string.to_f
+        @current_freedomscores_economy += string
       else
-        @current_freedom_economy = string
+        @current_freedom_economy += string
       end
     when Constants::NationCollectors::COLLECT_POLITICALFREEDOM
       if string.integer?
-        @current_freedomscores_politicalfreedom = string.to_f
+        @current_freedomscores_politicalfreedom += string
       else
-        @current_freedom_politicalfreedom = string
+        @current_freedom_politicalfreedom += string
       end
-    when Constants::NationCollectors::COLLECT_REGION then @current_region = string
-    when Constants::NationCollectors::COLLECT_POPULATION then @current_population = string.to_i
-    when Constants::NationCollectors::COLLECT_TAX then @current_tax = string.to_f
-    when Constants::NationCollectors::COLLECT_ANIMAL then @current_animal = string
-    when Constants::NationCollectors::COLLECT_CURRENCY then @current_currency = string
-    when Constants::NationCollectors::COLLECT_DEMONYM then @current_demonym = string
-    when Constants::NationCollectors::COLLECT_DEMONYM2 then @current_demonym2 = string
-    when Constants::NationCollectors::COLLECT_DEMONYM2PLURAL then @current_demonym2plural = string
-    when Constants::NationCollectors::COLLECT_FLAG then @current_flag = string
-    when Constants::NationCollectors::COLLECT_MAJORINDUSTRY then @current_majorindustry = string
-    when Constants::NationCollectors::COLLECT_GOVTPRIORITY then @current_govtpriority = string
-    when Constants::NationCollectors::COLLECT_ADMINISTRATION then @current_administration = string.to_f
-    when Constants::NationCollectors::COLLECT_DEFENCE then @current_defence = string.to_f
-    when Constants::NationCollectors::COLLECT_EDUCATION then @current_education = string.to_f
-    when Constants::NationCollectors::COLLECT_ENVIRONMENT then @current_environment = string.to_f
-    when Constants::NationCollectors::COLLECT_HEALTHCARE then @current_healthcare = string.to_f
-    when Constants::NationCollectors::COLLECT_COMMERCE then @current_commerce = string.to_f
-    when Constants::NationCollectors::COLLECT_INTERNATIONALAID then @current_internationalaid = string.to_f
-    when Constants::NationCollectors::COLLECT_LAWANDORDER then @current_lawandorder = string.to_f
-    when Constants::NationCollectors::COLLECT_SPIRITUALITY then @current_spirituality = string.to_f
-    when Constants::NationCollectors::COLLECT_WELFARE then @current_welfare = string.to_f
-    when Constants::NationCollectors::COLLECT_FOUNDED then @current_founded = string
-    when Constants::NationCollectors::COLLECT_FIRSTLOGIN then @current_firstlogin = string.to_i
-    when Constants::NationCollectors::COLLECT_LASTLOGIN then @current_lastlogin = string.to_i
-    when Constants::NationCollectors::COLLECT_LASTACTIVITY then @current_lastactivity = string
-    when Constants::NationCollectors::COLLECT_INFLUENCE then @current_influence = string
-    when Constants::NationCollectors::COLLECT_PUBLICSECTOR then @current_publicsector = string.to_f
-    when Constants::NationCollectors::COLLECT_CAUSE then @current_death_cause[:value] = string.to_f
-    when Constants::NationCollectors::COLLECT_LEADER then @current_leader = string
-    when Constants::NationCollectors::COLLECT_CAPITAL then @current_capital = string
-    when Constants::NationCollectors::COLLECT_RELIGION then @current_religion = string
-    when Constants::NationCollectors::COLLECT_FACTBOOKS then @current_factbooks = string.to_i
-    when Constants::NationCollectors::COLLECT_DISPATCHES then @current_dispatches = string.to_i
-    when Constants::NationCollectors::COLLECT_DBID then @current_dbid = string.to_i
+    when Constants::NationCollectors::COLLECT_REGION then @current_region += string
+    when Constants::NationCollectors::COLLECT_POPULATION then @current_population += string
+    when Constants::NationCollectors::COLLECT_TAX then @current_tax += string
+    when Constants::NationCollectors::COLLECT_ANIMAL then @current_animal += string
+    when Constants::NationCollectors::COLLECT_CURRENCY then @current_currency += string
+    when Constants::NationCollectors::COLLECT_DEMONYM then @current_demonym += string
+    when Constants::NationCollectors::COLLECT_DEMONYM2 then @current_demonym2 += string
+    when Constants::NationCollectors::COLLECT_DEMONYM2PLURAL then @current_demonym2plural += string
+    when Constants::NationCollectors::COLLECT_FLAG then @current_flag += string
+    when Constants::NationCollectors::COLLECT_MAJORINDUSTRY then @current_majorindustry += string
+    when Constants::NationCollectors::COLLECT_GOVTPRIORITY then @current_govtpriority += string
+    when Constants::NationCollectors::COLLECT_ADMINISTRATION then @current_administration += string
+    when Constants::NationCollectors::COLLECT_DEFENCE then @current_defence += string
+    when Constants::NationCollectors::COLLECT_EDUCATION then @current_education += string
+    when Constants::NationCollectors::COLLECT_ENVIRONMENT then @current_environment += string
+    when Constants::NationCollectors::COLLECT_HEALTHCARE then @current_healthcare += string
+    when Constants::NationCollectors::COLLECT_COMMERCE then @current_commerce += string
+    when Constants::NationCollectors::COLLECT_INTERNATIONALAID then @current_internationalaid += string
+    when Constants::NationCollectors::COLLECT_LAWANDORDER then @current_lawandorder += string
+    when Constants::NationCollectors::COLLECT_SPIRITUALITY then @current_spirituality += string
+    when Constants::NationCollectors::COLLECT_WELFARE then @current_welfare += string
+    when Constants::NationCollectors::COLLECT_FOUNDED then @current_founded += string
+    when Constants::NationCollectors::COLLECT_FIRSTLOGIN then @current_firstlogin += string
+    when Constants::NationCollectors::COLLECT_LASTLOGIN then @current_lastlogin += string
+    when Constants::NationCollectors::COLLECT_LASTACTIVITY then @current_lastactivity += string
+    when Constants::NationCollectors::COLLECT_INFLUENCE then @current_influence += string
+    when Constants::NationCollectors::COLLECT_PUBLICSECTOR then @current_publicsector += string
+    when Constants::NationCollectors::COLLECT_CAUSE then @current_death_cause[:value] += string
+    when Constants::NationCollectors::COLLECT_LEADER then @current_leader += string
+    when Constants::NationCollectors::COLLECT_CAPITAL then @current_capital += string
+    when Constants::NationCollectors::COLLECT_RELIGION then @current_religion += string
+    when Constants::NationCollectors::COLLECT_FACTBOOKS then @current_factbooks += string
+    when Constants::NationCollectors::COLLECT_DISPATCHES then @current_dispatches += string
+    when Constants::NationCollectors::COLLECT_DBID then @current_dbid += string
     end
   end
 
@@ -237,8 +237,11 @@ class NationParser < Nokogiri::XML::SAX::Document
   def end_element(name)
     case name
     when 'CAUSE'
-      @current_deaths << @current_death_cause
-      @current_death_cause = { cause: '', value: 0 }
+      @current_deaths << {
+        cause: @current_death_cause[:cause],
+        value: @current_death_cause[:value].to_f
+      }
+      @current_death_cause = { cause: '', value: '' }
       @state = Constants::NationCollectors::COLLECT_NOTHING
     when 'NATION'
       @current_nation = {
@@ -249,15 +252,15 @@ class NationParser < Nokogiri::XML::SAX::Document
         category: @current_category,
         unstatus: @current_unstatus,
         endorsements: @current_endorsements,
-        issues_answered: @current_issues_answered,
+        issues_answered: @current_issues_answered.to_i,
         freedom: {
           civilrights: @current_freedom_civilrights,
           economy: @current_freedom_economy,
           politicalfreedom: @current_freedom_politicalfreedom
         },
         region: @current_region,
-        population: @current_population,
-        tax: @current_tax,
+        population: @current_population.to_i,
+        tax: @current_tax.to_f,
         animal: @current_animal,
         currency: @current_currency,
         demonym: @current_demonym,
@@ -267,37 +270,37 @@ class NationParser < Nokogiri::XML::SAX::Document
         majorindustry: @current_majorindustry,
         govtpriority: @current_govtpriority,
         govt: {
-          administration: @current_administration,
-          defence: @current_defence,
-          education: @current_education,
-          environment: @current_environment,
-          healthcare: @current_healthcare,
-          commerce: @current_commerce,
-          internationalaid: @current_internationalaid,
-          lawandorder: @current_lawandorder,
-          publictransport: @current_publictransport,
-          socialequality: @current_socialequality,
-          spirituality: @current_spirituality,
-          welfare: @current_welfare
+          administration: @current_administration.to_f,
+          defence: @current_defence.to_f,
+          education: @current_education.to_f,
+          environment: @current_environment.to_f,
+          healthcare: @current_healthcare.to_f,
+          commerce: @current_commerce.to_f,
+          internationalaid: @current_internationalaid.to_f,
+          lawandorder: @current_lawandorder.to_f,
+          publictransport: @current_publictransport.to_f,
+          socialequality: @current_socialequality.to_f,
+          spirituality: @current_spirituality.to_f,
+          welfare: @current_welfare.to_f
         },
         founded: @current_founded,
-        firstlogin: @current_firstlogin,
-        lastlogin: @current_lastlogin,
+        firstlogin: @current_firstlogin.to_i,
+        lastlogin: @current_lastlogin.to_i,
         lastactivity: @current_lastactivity,
         influence: @current_influence,
         freedomscores: {
-          civilrights: @current_freedomscores_civilrights,
-          economy: @current_freedomscores_economy,
-          politicalfreedom: @current_freedomscores_politicalfreedom
+          civilrights: @current_freedomscores_civilrights.to_f,
+          economy: @current_freedomscores_economy.to_f,
+          politicalfreedom: @current_freedomscores_politicalfreedom.to_f
         },
-        publicsector: @current_publicsector,
+        publicsector: @current_publicsector.to_f,
         deaths: @current_deaths,
         leader: @current_leader,
         capital: @current_capital,
         religion: @current_religion,
         factbooks: @current_factbooks,
-        dispatches: @current_dispatches,
-        dbid: @current_dbid
+        dispatches: @current_dispatches.to_i,
+        dbid: @current_dbid.to_i
       }
 
       @nations << @current_nation
@@ -378,27 +381,27 @@ class RegionParser < Nokogiri::XML::SAX::Document
     @current_embassies = []
     @current_name = ''
     @current_factbook = ''
-    @current_numnations = 0
+    @current_numnations = ''
     @current_nations = []
     @current_delegate = ''
-    @current_delegatevotes = 0
+    @current_delegatevotes = ''
     @current_delegateauth = ''
     @current_founder = ''
     @current_founderauth = ''
     @current_officer_nation = ''
     @current_officer_office = ''
     @current_officer_authority = ''
-    @current_officer_time = 0
+    @current_officer_time = ''
     @current_officer_by = ''
-    @current_officer_order = 0
+    @current_officer_order = ''
     @current_power = ''
     @current_flag = ''
-    @current_banner = 0
+    @current_banner = ''
     @current_embassy = {
       type: '',
       name: ''
     }
-    @current_lastupdate = 0
+    @current_lastupdate = ''
   end
 
   #
@@ -448,28 +451,28 @@ class RegionParser < Nokogiri::XML::SAX::Document
   #
   def characters(string)
     case @state
-    when Constants::RegionCollectors::COLLECT_NAME then @current_name = string
-    when Constants::RegionCollectors::COLLECT_NUMNATIONS then @current_numnations = string.to_i
+    when Constants::RegionCollectors::COLLECT_NAME then @current_name += string
+    when Constants::RegionCollectors::COLLECT_NUMNATIONS then @current_numnations += string
     when Constants::RegionCollectors::COLLECT_NATIONS
       string.split(':').each do |nation|
         @current_nations << nation.strip
       end
-    when Constants::RegionCollectors::COLLECT_DELEGATE then @current_delegate = string
-    when Constants::RegionCollectors::COLLECT_DELEGATEVOTES then @current_delegatevotes = string.to_i
-    when Constants::RegionCollectors::COLLECT_DELEGATEAUTH then @current_delegateauth = string
-    when Constants::RegionCollectors::COLLECT_FOUNDER then @current_founder = string
-    when Constants::RegionCollectors::COLLECT_FOUNDERAUTH then @current_founderauth = string
-    when Constants::RegionCollectors::COLLECT_OFFICER_NATION then @current_officer_nation = string
-    when Constants::RegionCollectors::COLLECT_OFFICER_OFFICE then @current_officer_office = string
-    when Constants::RegionCollectors::COLLECT_OFFICER_AUTHORITY then @current_officer_authority = string
-    when Constants::RegionCollectors::COLLECT_OFFICER_TIME then @current_officer_time = string.to_i
-    when Constants::RegionCollectors::COLLECT_OFFICER_BY then @current_officer_by = string
-    when Constants::RegionCollectors::COLLECT_OFFICER_ORDER then @current_officer_order = string.to_i
-    when Constants::RegionCollectors::COLLECT_POWER then @current_power = string
-    when Constants::RegionCollectors::COLLECT_FLAG then @current_flag = string
-    when Constants::RegionCollectors::COLLECT_BANNER then @current_banner = string.to_i
-    when Constants::RegionCollectors::COLLECT_EMBASSY then @current_embassy[:name] = string
-    when Constants::RegionCollectors::COLLECT_LASTUPDATE then @current_lastupdate = string.to_i
+    when Constants::RegionCollectors::COLLECT_DELEGATE then @current_delegate += string
+    when Constants::RegionCollectors::COLLECT_DELEGATEVOTES then @current_delegatevotes += string
+    when Constants::RegionCollectors::COLLECT_DELEGATEAUTH then @current_delegateauth += string
+    when Constants::RegionCollectors::COLLECT_FOUNDER then @current_founder += string
+    when Constants::RegionCollectors::COLLECT_FOUNDERAUTH then @current_founderauth += string
+    when Constants::RegionCollectors::COLLECT_OFFICER_NATION then @current_officer_nation += string
+    when Constants::RegionCollectors::COLLECT_OFFICER_OFFICE then @current_officer_office += string
+    when Constants::RegionCollectors::COLLECT_OFFICER_AUTHORITY then @current_officer_authority += string
+    when Constants::RegionCollectors::COLLECT_OFFICER_TIME then @current_officer_time += string
+    when Constants::RegionCollectors::COLLECT_OFFICER_BY then @current_officer_by += string
+    when Constants::RegionCollectors::COLLECT_OFFICER_ORDER then @current_officer_order += string
+    when Constants::RegionCollectors::COLLECT_POWER then @current_power += string
+    when Constants::RegionCollectors::COLLECT_FLAG then @current_flag += string
+    when Constants::RegionCollectors::COLLECT_BANNER then @current_banner += string
+    when Constants::RegionCollectors::COLLECT_EMBASSY then @current_embassy[:name] += string
+    when Constants::RegionCollectors::COLLECT_LASTUPDATE then @current_lastupdate += string
     end
   end
 
@@ -479,7 +482,7 @@ class RegionParser < Nokogiri::XML::SAX::Document
   #
   def cdata_block(string)
     case @state
-    when Constants::RegionCollectors::COLLECT_FACTBOOK then @current_factbook = string
+    when Constants::RegionCollectors::COLLECT_FACTBOOK then @current_factbook += string
     end
   end
 
@@ -501,34 +504,34 @@ class RegionParser < Nokogiri::XML::SAX::Document
         nation: @current_officer_nation,
         office: @current_officer_office,
         authority: @current_officer_authority,
-        time: @current_officer_time,
+        time: @current_officer_time.to_i,
         by: @current_officer_by,
-        order: @current_officer_order
+        order: @current_officer_order.to_i
       }
       @current_officer_nation = ''
       @current_officer_office = ''
       @current_officer_authority = ''
-      @current_officer_time = 0
+      @current_officer_time = ''
       @current_officer_by = ''
-      @current_officer_order = 0
+      @current_officer_order = ''
       @state = Constants::RegionCollectors::COLLECT_NOTHING
     when 'REGION'
       @current_region = {
         name: @current_name,
         factbook: @current_factbook,
-        numnations: @current_numnations,
+        numnations: @current_numnations.to_i,
         nations: @current_nations,
         delegate: @current_delegate,
-        delegatevotes: @current_delegatevotes,
+        delegatevotes: @current_delegatevotes.to_i,
         delegateauth: @current_delegateauth,
         founder: @current_founder,
         founderauth: @current_founderauth,
         officers: @current_officers,
         power: @current_power,
         flag: @current_flag,
-        banner: @current_banner,
+        banner: @current_banner.to_i,
         embassies: @current_embassies,
-        lastupdate: @current_lastupdate
+        lastupdate: @current_lastupdate.to_i
       }
       @regions << @current_region
       reset_state
