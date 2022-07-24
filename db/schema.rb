@@ -53,6 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_211318) do
     t.datetime "updated_at", null: false
     t.string "inheritance"
     t.index ["name"], name: "index_nations_on_name", unique: true
+    t.index ["region"], name: "index_nations_on_region"
+    t.index ["unstatus"], name: "index_nations_on_unstatus"
   end
 
   create_table "regions", primary_key: "name", id: :string, force: :cascade do |t|
