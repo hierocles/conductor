@@ -1,19 +1,14 @@
 # frozen_string_literal: true
 
 #
-# Determine if string is an integer in quotes
-# <https://stackoverflow.com/a/1235891>
+# Extend string class
 #
 class String
-  def integer?
-    [                          # In descending order of likeliness:
-      /^[-+]?[1-9]([0-9]*)?$/, # decimal
-      /^0[0-7]+$/,             # octal
-      /^0x[0-9A-Fa-f]+$/,      # hexadecimal
-      /^0b[01]+$/              # binary
-    ].each do |match_pattern|
-      return true if self =~ match_pattern
-    end
+  #
+  # Determine if alpha to differentiate freedom vs freedomscore
+  #
+  def letter?
+    match?(/[[:alpha:]]/)
   end
 end
 
@@ -173,22 +168,22 @@ class NationParser < Nokogiri::XML::SAX::Document
       end
     when Constants::NationCollectors::COLLECT_ISSUES_ANSWERED then @current_issues_answered += string
     when Constants::NationCollectors::COLLECT_CIVILRIGHTS
-      if string.integer?
-        @current_freedomscores_civilrights += string
-      else
+      if string.letter?
         @current_freedom_civilrights += string
+      else
+        @current_freedomscores_civilrights += string
       end
     when Constants::NationCollectors::COLLECT_ECONOMY
-      if string.integer?
-        @current_freedomscores_economy += string
-      else
+      if string.letter?
         @current_freedom_economy += string
+      else
+        @current_freedomscores_economy += string
       end
     when Constants::NationCollectors::COLLECT_POLITICALFREEDOM
-      if string.integer?
-        @current_freedomscores_politicalfreedom += string
-      else
+      if string.letter?
         @current_freedom_politicalfreedom += string
+      else
+        @current_freedomscores_politicalfreedom += string
       end
     when Constants::NationCollectors::COLLECT_REGION then @current_region += string
     when Constants::NationCollectors::COLLECT_POPULATION then @current_population += string
@@ -572,13 +567,13 @@ desc 'Parse XML file and import to database'
 namespace :parse do
   task regions: :environment do
     parser = Nokogiri::XML::SAX::Parser.new(RegionParser.new)
-    parser.parse(File.open('storage/dumps/regions.xml'))
+    parser.parse(File.open('storage/regions.xml'))
     Rails.logger.info "Parsed regions at #{Time.zone.now}"
   end
 
   task nations: :environment do
     parser = Nokogiri::XML::SAX::Parser.new(NationParser.new)
-    parser.parse(File.open('storage/dumps/nations.xml'))
+    parser.parse(File.open('storage/nations.xml'))
     Rails.logger.info "Parsed nations at #{Time.zone.now}"
   end
 end
