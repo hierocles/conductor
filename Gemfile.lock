@@ -122,7 +122,7 @@ GEM
     io-console (0.5.11)
     irb (1.5.1)
       reline (>= 0.3.0)
-    json (2.6.2)
+    json (2.6.3)
     jsonapi-renderer (0.2.2)
     loofah (2.19.0)
       crass (~> 1.0.2)
