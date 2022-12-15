@@ -202,7 +202,7 @@ GEM
     rake (13.0.6)
     redis (4.7.1)
     regexp_parser (2.6.1)
-    reline (0.3.1)
+    reline (0.3.2)
       io-console (~> 0.5)
     rexml (3.2.5)
     rubocop (1.40.0)
