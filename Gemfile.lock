@@ -125,7 +125,7 @@ GEM
       reline (>= 0.3.0)
     json (2.6.3)
     jsonapi-renderer (0.2.2)
-    loofah (2.20.0)
+    loofah (2.21.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.8.1)
