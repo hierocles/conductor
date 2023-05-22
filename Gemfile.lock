@@ -78,7 +78,7 @@ GEM
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.2.2)
-    connection_pool (2.4.0)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
