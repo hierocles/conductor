@@ -74,6 +74,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     ast (2.4.2)
+    base64 (0.1.1)
     builder (3.2.4)
     case_transform (0.2)
       activesupport
@@ -208,7 +209,8 @@ GEM
     reline (0.3.7)
       io-console (~> 0.5)
     rexml (3.2.6)
-    rubocop (1.55.1)
+    rubocop (1.56.0)
+      base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
