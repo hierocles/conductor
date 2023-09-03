@@ -28,6 +28,14 @@ module API
         get ':name/endorsable' do
           render Nation.has_not_endorsed(permitted_params[:name]), serializer: NationNameSerializer
         end
+
+        desc 'Subset of nations that are not yet endorsing the target nation'
+        params do
+          requires :name, type: String, desc: 'The name of the nation'
+        end
+        get ':name/not_endorsed_by' do
+          render Nation.not_endorsing(permitted_params[:name]), serializer: NationNameSerializer
+        end
       end
     end
   end
