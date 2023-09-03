@@ -13,7 +13,7 @@ gem 'puma', '~> 5.0'
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'nokogiri', '~> 1.13.6'
+gem 'nokogiri', '>= 1.14.3'
 
 gem 'redis', '~> 4.7.1'
 
