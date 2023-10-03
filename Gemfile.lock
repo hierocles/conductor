@@ -235,7 +235,7 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    sidekiq (6.5.9)
+    sidekiq (6.5.10)
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
