@@ -124,7 +124,7 @@ GEM
     irb (1.9.0)
       rdoc
       reline (>= 0.3.8)
-    json (2.6.3)
+    json (2.7.1)
     jsonapi-renderer (0.2.2)
     language_server-protocol (3.17.0.3)
     loofah (2.22.0)
