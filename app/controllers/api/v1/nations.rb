@@ -18,7 +18,7 @@ module API
           requires :name, type: String, desc: 'The name of the nation'
         end
         get ':name' do
-          Nation.where(name: permitted_params[:name]).first!
+          Nation.where(name: permitted_params[:name].gsub(' ', '_').downcase).first!
         end
 
         desc 'Subset of nations that can be endorsed by target nation'
@@ -26,7 +26,8 @@ module API
           requires :name, type: String, desc: 'The name of the nation'
         end
         get ':name/endorsable' do
-          render Nation.has_not_endorsed(permitted_params[:name]), serializer: NationNameSerializer
+          render Nation.has_not_endorsed(permitted_params[:name].gsub(' ', '_').downcase),
+                 serializer: NationNameSerializer
         end
 
         desc 'Subset of nations that are not yet endorsing the target nation'
@@ -34,7 +35,7 @@ module API
           requires :name, type: String, desc: 'The name of the nation'
         end
         get ':name/not_endorsed_by' do
-          render Nation.not_endorsing(permitted_params[:name]), serializer: NationNameSerializer
+          render Nation.not_endorsing(permitted_params[:name].gsub(' ', '_').downcase), serializer: NationNameSerializer
         end
       end
     end

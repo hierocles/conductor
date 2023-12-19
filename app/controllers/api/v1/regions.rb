@@ -18,7 +18,7 @@ module API
           requires :name, type: String, desc: 'The name of the region'
         end
         get ':name' do
-          Region.where(name: permitted_params[:name]).first!
+          Region.where(name: permitted_params[:name].gsub(' ', '_').downcase).first!
         end
       end
     end

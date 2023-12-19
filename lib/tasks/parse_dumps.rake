@@ -156,7 +156,7 @@ class NationParser < Nokogiri::XML::SAX::Document
   #
   def characters(string)
     case @state
-    when Constants::NationCollectors::COLLECT_NAME then @current_name += string
+    when Constants::NationCollectors::COLLECT_NAME then @current_name += string.gsub(' ', '_').downcase
     when Constants::NationCollectors::COLLECT_TYPE then @current_type += string
     when Constants::NationCollectors::COLLECT_FULLNAME then @current_fullname += string
     when Constants::NationCollectors::COLLECT_MOTTO then @current_motto += string
@@ -446,7 +446,7 @@ class RegionParser < Nokogiri::XML::SAX::Document
   #
   def characters(string)
     case @state
-    when Constants::RegionCollectors::COLLECT_NAME then @current_name += string
+    when Constants::RegionCollectors::COLLECT_NAME then @current_name += string.gsub(' ', '_').downcase
     when Constants::RegionCollectors::COLLECT_NUMNATIONS then @current_numnations += string
     when Constants::RegionCollectors::COLLECT_NATIONS
       string.split(':').each do |nation|
