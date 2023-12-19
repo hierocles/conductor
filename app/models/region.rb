@@ -6,4 +6,6 @@
 #
 class Region < ApplicationRecord
   self.primary_key = :name
+
+  normalizes :name, with: ->(name) { name.gsub(' ', '_').downcase }
 end
