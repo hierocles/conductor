@@ -20,6 +20,21 @@ module API
         get ':name' do
           Region.where(name: permitted_params[:name]).first!
         end
+
+        desc 'Returns names of nations in the region not endorsing the delegate'
+        params do
+          requires :name, type: String, desc: 'The name of the region'
+        end
+        get ':name/not_endorsing_delegate' do
+          region = Region.where(name: permitted_params[:name]).first!
+          delegate_nation = Nation.where(name: region.delegate).first!
+
+          render Nation.where(unstatus: 'WA Member')
+                       .where('lower(region) = ?',
+                              permitted_params[:name].downcase.gsub('_', ' '))
+                       .where.not(name: delegate_nation.endorsements),
+                 serializer: NationNameSerializer
+        end
       end
     end
   end
