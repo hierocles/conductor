@@ -131,7 +131,7 @@ GEM
       grape (>= 0.8.0)
     grape_on_rails_routes (0.3.2)
       rails (>= 3.1.1)
-    i18n (1.14.4)
+    i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
     irb (1.13.1)
