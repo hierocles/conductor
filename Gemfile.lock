@@ -230,7 +230,7 @@ GEM
       psych (>= 4.0.0)
     redis (4.7.1)
     regexp_parser (2.9.2)
-    reline (0.5.8)
+    reline (0.5.9)
       io-console (~> 0.5)
     rexml (3.3.0)
       strscan
