@@ -151,7 +151,7 @@ GEM
     marcel (1.0.4)
     mini_mime (1.1.5)
     minitest (5.24.1)
-    mustermann (3.0.1)
+    mustermann (3.0.2)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.2)
       mustermann (>= 1.0.0)
