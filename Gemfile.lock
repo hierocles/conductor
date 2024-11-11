@@ -236,7 +236,7 @@ GEM
       psych (>= 4.0.0)
     redis (4.7.1)
     regexp_parser (2.9.2)
-    reline (0.5.10)
+    reline (0.5.11)
       io-console (~> 0.5)
     rubocop (1.68.0)
       json (~> 2.3)
