@@ -156,7 +156,7 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.25.2)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.2)
