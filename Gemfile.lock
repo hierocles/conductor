@@ -162,7 +162,7 @@ GEM
     mustermann-grape (1.0.2)
       mustermann (>= 1.0.0)
     mutex_m (0.3.0)
-    net-imap (0.5.1)
+    net-imap (0.5.2)
       date
       net-protocol
     net-pop (0.1.2)
