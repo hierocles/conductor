@@ -181,7 +181,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
-    psych (5.2.1)
+    psych (5.2.2)
       date
       stringio
     puma (5.6.9)
